@@ -15,3 +15,5 @@
 # ToolsSharp
 
 This is a project that contains several small helper functions and methods that i use across my projects.
+
+You can find this package on the [NuGet Package Manager](https://www.nuget.org/packages/ToolsSharp/).
