@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace ToolsSharp
+﻿namespace ToolsSharp
 {
     /// <summary>
     /// A set of methods to make it easier to work with <seealso cref="Task"/>s

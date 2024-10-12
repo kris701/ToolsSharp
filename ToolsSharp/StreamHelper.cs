@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ToolsSharp
+﻿namespace ToolsSharp
 {
     /// <summary>
     /// A class intended to make it easier to work with <seealso cref="Stream"/> instances.

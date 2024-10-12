@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ToolsSharp
+﻿namespace ToolsSharp
 {
+    /// <summary>
+    /// Helper methods for CLI applications
+    /// </summary>
     public static class ConsoleHelpers
     {
+        /// <summary>
+        /// Print a line of text in a color
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="color"></param>
         public static void WriteLineColor(string text, ConsoleColor? color = null)
         {
             if (color != null)
@@ -18,6 +20,11 @@ namespace ToolsSharp
             Console.ResetColor();
         }
 
+        /// <summary>
+        /// Print text in a color
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="color"></param>
         public static void WriteColor(string text, ConsoleColor? color = null)
         {
             if (color != null)
