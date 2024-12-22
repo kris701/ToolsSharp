@@ -7,7 +7,7 @@ on:
 
 jobs:
   BuildAndTest:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     name: Run Tests
     steps:
       - name: Checkout repository
@@ -23,7 +23,7 @@ jobs:
         run: dotnet test --no-restore --verbosity normal
   BuildAndPublish:
     needs: BuildAndTest
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     name: Update NuGet 
     steps:
       - name: Checkout repository
