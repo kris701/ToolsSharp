@@ -28,7 +28,6 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Cant_StreamToString_IfStreamClosed()
         {
             // ARRANGE
@@ -37,7 +36,7 @@
                 writer.Write("abc");
 
             // ACT
-            StreamHelper.StreamToString(str);
+            Assert.ThrowsExactly< ArgumentNullException>(() => StreamHelper.StreamToString(str));
         }
 
         #endregion StreamToString, Stream
@@ -67,7 +66,6 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Cant_StreamToString_MemoryStream_IfStreamClosed()
         {
             // ARRANGE
@@ -76,8 +74,8 @@
                 writer.Write("abc");
 
             // ACT
-            StreamHelper.StreamToString(str);
-        }
+			Assert.ThrowsExactly<ArgumentNullException>(() => StreamHelper.StreamToString(str));
+		}
 
         #endregion StreamToString, MemoryStream
 
