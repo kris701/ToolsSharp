@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ToolsSharp.Interfaces
+﻿namespace ToolsSharp.Interfaces
 {
 	/// <summary>
 	/// A version of <seealso cref="ICloneable"/> where the output type is known at compile time
