@@ -9,15 +9,16 @@ namespace ToolsSharp
 	public static class HashingHelpers
 	{
 		/// <summary>
-		/// Hash a given string
+		/// Hash a given string using <paramref name="algorithm"/> hash algorithm
 		/// </summary>
 		/// <param name="value"></param>
+		/// <param name="algorithm"></param>
 		/// <returns></returns>
-		public static string HashString(string value)
+		public static string HashString(string value, HashAlgorithmName algorithm)
 		{
 			byte[] salt;
 			RandomNumberGenerator.Create().GetBytes(salt = new byte[16]);
-			var hash = Rfc2898DeriveBytes.Pbkdf2(value, salt, 100000, HashAlgorithmName.SHA3_512, 20);
+			var hash = Rfc2898DeriveBytes.Pbkdf2(value, salt, 100000, algorithm, 20);
 			var hashBytes = new byte[36];
 			Array.Copy(salt, 0, hashBytes, 0, 16);
 			Array.Copy(hash, 0, hashBytes, 16, 20);
@@ -26,12 +27,13 @@ namespace ToolsSharp
 		}
 
 		/// <summary>
-		/// Check if a hash created from <seealso cref="HashString(string)"/> is valid
+		/// Check if a value matches a hash that was made by <seealso cref="HashString(string, HashAlgorithmName)"/>
 		/// </summary>
 		/// <param name="hashValue"></param>
 		/// <param name="value"></param>
+		/// <param name="algorithm"></param>
 		/// <returns></returns>
-		public static bool VerifyHash(string hashValue, string value)
+		public static bool VerifyHash(string hashValue, string value, HashAlgorithmName algorithm)
 		{
 			/* Extract the bytes */
 			var hashBytes = Convert.FromBase64String(hashValue);
@@ -39,7 +41,7 @@ namespace ToolsSharp
 			var salt = new byte[16];
 			Array.Copy(hashBytes, 0, salt, 0, 16);
 			/* Compute the hash on the password the user entered */
-			var hash = Rfc2898DeriveBytes.Pbkdf2(value, salt, 100000, HashAlgorithmName.SHA3_512, 20);
+			var hash = Rfc2898DeriveBytes.Pbkdf2(value, salt, 100000, algorithm, 20);
 			/* Compare the results */
 			for (var i = 0; i < 20; i++)
 				if (hashBytes[i + 16] != hash[i])

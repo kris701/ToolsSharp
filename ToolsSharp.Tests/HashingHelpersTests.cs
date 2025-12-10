@@ -18,10 +18,10 @@ namespace ToolsSharp.Tests
 			// ARRANGE
 
 			// ACT
-			var actual = HashingHelpers.HashString(value);
+			var actual = HashingHelpers.HashString(value, System.Security.Cryptography.HashAlgorithmName.SHA1);
 
 			// ASSERT
-			Assert.IsTrue(HashingHelpers.VerifyHash(actual, value));
+			Assert.IsTrue(HashingHelpers.VerifyHash(actual, value, System.Security.Cryptography.HashAlgorithmName.SHA1));
 		}
 	}
 }
