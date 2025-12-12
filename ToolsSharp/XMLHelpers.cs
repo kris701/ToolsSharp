@@ -22,6 +22,11 @@ namespace ToolsSharp
 			return current;
 		}
 
+		public static XElement? GetFirstDescendantOrDefault(this XElement parent, string name)
+		{
+			return parent.Descendants().FirstOrDefault(x => x.Name.LocalName == name);
+		}
+
 		public static decimal? GetDecimalValue(this XElement xElement)
 		{
 			return decimal.Parse(xElement.Value, new CultureInfo("en-US"));
