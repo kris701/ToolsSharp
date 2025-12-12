@@ -24,7 +24,7 @@ namespace ToolsSharp
 
 		public static XElement? GetFirstDescendantOrDefault(this XElement parent, string name)
 		{
-			return parent.Descendants().FirstOrDefault(x => x.Name.LocalName == name);
+			return parent.DescendantsAndSelf().FirstOrDefault(x => x.Name.LocalName == name);
 		}
 
 		public static decimal? GetDecimalValue(this XElement xElement)
