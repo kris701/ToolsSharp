@@ -13,6 +13,13 @@
 		private int _size;
 
 		/// <summary>
+		/// Get a dictionary value by its key
+		/// </summary>
+		/// <param name="key"></param>
+		/// <returns></returns>
+		public TValue this[TKey key] => _dict[key];
+
+		/// <summary>
 		/// Main constructor
 		/// </summary>
 		/// <param name="size"></param>
