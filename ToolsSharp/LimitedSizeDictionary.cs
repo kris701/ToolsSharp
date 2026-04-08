@@ -20,6 +20,13 @@
 		public TValue this[TKey key] => _dict[key];
 
 		/// <summary>
+		/// Check if a given key exists in the dictionary
+		/// </summary>
+		/// <param name="key"></param>
+		/// <returns></returns>
+		public bool ContainsKey(TKey key) => _dict.ContainsKey(key);
+
+		/// <summary>
 		/// Main constructor
 		/// </summary>
 		/// <param name="size"></param>
