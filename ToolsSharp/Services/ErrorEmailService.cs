@@ -15,7 +15,7 @@
 		/// <param name="clientId"></param>
 		/// <param name="clientSecret"></param>
 		/// <param name="tenantId"></param>
-		public ErrorEmailService(string fromEmail, string toEmail, string clientId, string clientSecret, string tenantId) : base(fromEmail, clientId, clientSecret, tenantId)
+		public ErrorEmailService(string fromEmail, string toEmail, Guid clientId, string clientSecret, Guid tenantId) : base(fromEmail, clientId, clientSecret, tenantId)
 		{
 			_toEmail = toEmail;
 		}

@@ -9,10 +9,10 @@ namespace ToolsSharp.Services
 	// https://medium.com/@mitchelldalehein25/connecting-to-microsoft-graph-api-with-a-client-secret-c-f791440231f1
 	internal class TokenProvider : IAccessTokenProvider
 	{
-		private readonly string _clientId;
+		private readonly Guid _clientId;
 		private readonly string _clientSecret;
-		private readonly string _tenantId;
-		public TokenProvider(string clientId, string clientSecret, string tenantId)
+		private readonly Guid _tenantId;
+		public TokenProvider(Guid clientId, string clientSecret, Guid tenantId)
 		{
 			_clientId = clientId;
 			_clientSecret = clientSecret;
@@ -21,7 +21,7 @@ namespace ToolsSharp.Services
 		public Task<string> GetAuthorizationTokenAsync(Uri uri, Dictionary<string, object> additionalAuthenticationContext = default,
 			CancellationToken cancellationToken = default)
 		{
-			var app = ConfidentialClientApplicationBuilder.Create(_clientId)
+			var app = ConfidentialClientApplicationBuilder.Create(_clientId.ToString())
 				.WithClientSecret(_clientSecret)
 				.WithAuthority(new Uri($"https://login.microsoftonline.com/{_tenantId}"))
 				.Build();

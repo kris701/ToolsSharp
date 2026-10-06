@@ -11,9 +11,9 @@ namespace ToolsSharp.Services
 	public class SimpleEmailService
 	{
 		internal readonly string _fromEmail = "";
-		internal readonly string _clientId = "";
+		internal readonly Guid _clientId = Guid.Empty;
 		internal readonly string _clientSecret = "";
-		internal readonly string _tenantId = "";
+		internal readonly Guid _tenantId = Guid.Empty;
 
 		/// <summary>
 		/// Main constructor
@@ -22,7 +22,7 @@ namespace ToolsSharp.Services
 		/// <param name="clientId"></param>
 		/// <param name="clientSecret"></param>
 		/// <param name="tenantId"></param>
-		public SimpleEmailService(string fromEmail, string clientId, string clientSecret, string tenantId)
+		public SimpleEmailService(string fromEmail, Guid clientId, string clientSecret, Guid tenantId)
 		{
 			_fromEmail = fromEmail;
 			_clientId = clientId;

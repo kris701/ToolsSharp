@@ -16,7 +16,7 @@ namespace ToolsSharp.Services
 		/// <param name="clientId"></param>
 		/// <param name="clientSecret"></param>
 		/// <param name="tenantId"></param>
-		public FileEmailService(string fromEmail, string clientId, string clientSecret, string tenantId) : base(fromEmail, clientId, clientSecret, tenantId)
+		public FileEmailService(string fromEmail, Guid clientId, string clientSecret, Guid tenantId) : base(fromEmail, clientId, clientSecret, tenantId)
 		{
 		}
 
