@@ -1,20 +1,14 @@
 ﻿using Microsoft.Graph;
 using Microsoft.Graph.Models;
-using Microsoft.Identity.Client;
 using Microsoft.Kiota.Abstractions.Authentication;
 
 namespace ToolsSharp.Services
 {
 	/// <summary>
-	/// A simple service to send out emails
+	/// Modified <seealso cref="SimpleEmailService"/> for sending to a single email every time
 	/// </summary>
-	public class SimpleEmailService
+	public class FileEmailService : SimpleEmailService
 	{
-		internal readonly string _fromEmail = "";
-		internal readonly string _clientId = "";
-		internal readonly string _clientSecret = "";
-		internal readonly string _tenantId = "";
-
 		/// <summary>
 		/// Main constructor
 		/// </summary>
@@ -22,22 +16,9 @@ namespace ToolsSharp.Services
 		/// <param name="clientId"></param>
 		/// <param name="clientSecret"></param>
 		/// <param name="tenantId"></param>
-		public SimpleEmailService(string fromEmail, string clientId, string clientSecret, string tenantId)
+		public FileEmailService(string fromEmail, string clientId, string clientSecret, string tenantId) : base(fromEmail, clientId, clientSecret, tenantId)
 		{
-			_fromEmail = fromEmail;
-			_clientId = clientId;
-			_clientSecret = clientSecret;
-			_tenantId = tenantId;
 		}
-
-		/// <summary>
-		/// Send a email to a single mail
-		/// </summary>
-		/// <param name="toEmail"></param>
-		/// <param name="title"></param>
-		/// <param name="message"></param>
-		/// <returns></returns>
-		public virtual async Task Send(string toEmail, string title, string message) => await Send(new List<string>() { toEmail }, new List<string>(), title, message);
 
 		/// <summary>
 		/// Send a email with a given title and message
@@ -46,8 +27,9 @@ namespace ToolsSharp.Services
 		/// <param name="ccEmail"></param>
 		/// <param name="title"></param>
 		/// <param name="message"></param>
+		/// <param name="files"></param>
 		/// <returns></returns>
-		public virtual async Task Send(List<string> toEmail, List<string> ccEmail, string title, string message)
+		public async Task SendWithFile(List<string> toEmail, List<string> ccEmail, string title, string message, List<FileEmailModel> files)
 		{
 			try
 			{
@@ -66,6 +48,15 @@ namespace ToolsSharp.Services
 						},
 						ToRecipients = toEmail.Select(x => EmailToRecipient(x)).ToList(),
 						CcRecipients = ccEmail.Select(x => EmailToRecipient(x)).ToList(),
+						Attachments = new List<Attachment>(files.Select(x =>
+						{
+							return new FileAttachment()
+							{
+								OdataType = "#microsoft.graph.fileAttachment",
+								ContentBytes = x.Content,
+								Name = x.Name
+							};
+						}).ToList()),
 					},
 					SaveToSentItems = false,
 				};
@@ -77,6 +68,30 @@ namespace ToolsSharp.Services
 			}
 		}
 
-		internal Recipient EmailToRecipient(string email) => new Recipient() { EmailAddress = new EmailAddress() { Address = email } };
+		/// <summary>
+		/// Simple file upload model
+		/// </summary>
+		public class FileEmailModel
+		{
+			/// <summary>
+			/// Name of the file
+			/// </summary>
+			public string Name { get; set; }
+			/// <summary>
+			/// Content of the file
+			/// </summary>
+			public byte[] Content { get; set; }
+
+			/// <summary>
+			/// Main constructor
+			/// </summary>
+			/// <param name="name"></param>
+			/// <param name="content"></param>
+			public FileEmailModel(string name, byte[] content)
+			{
+				Name = name;
+				Content = content;
+			}
+		}
 	}
 }
