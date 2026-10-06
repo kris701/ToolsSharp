@@ -37,7 +37,7 @@ namespace ToolsSharp.Services
 		/// <param name="title"></param>
 		/// <param name="message"></param>
 		/// <returns></returns>
-		public async Task Send(string toEmail, string title, string message)
+		public virtual async Task Send(string toEmail, string title, string message)
 		{
 			try
 			{
