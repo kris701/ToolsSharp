@@ -8,14 +8,14 @@ namespace ToolsSharp
 	public static class PolymorphicIConfigurationLoader
 	{
 		/// <summary>
-		/// Overload method
+		/// Deserialize a list of polymophic items
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="config"></param>
 		/// <param name="typeMap"></param>
 		/// <param name="discriminator"></param>
 		/// <returns></returns>
-		public static List<T> GetAsPolymorphic<T>(this IConfiguration config, Dictionary<string, Func<T>> typeMap, string discriminator = "$type")
+		public static List<T> GetListAsPolymorphic<T>(this IConfiguration config, Dictionary<string, Func<T>> typeMap, string discriminator = "$type")
 		{
 			var result = new List<T>();
 
@@ -39,6 +39,32 @@ namespace ToolsSharp
 			}
 
 			return result;
+		}
+
+		/// <summary>
+		/// Deserialize a polymorphic item
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="config"></param>
+		/// <param name="typeMap"></param>
+		/// <param name="discriminator"></param>
+		/// <returns></returns>
+		/// <exception cref="Exception"></exception>
+		public static T GetAsPolymorphic<T>(this IConfiguration config, Dictionary<string, Func<T>> typeMap, string discriminator = "$type")
+		{
+			// null value = the item doesn't exist in the array => exit loop
+			var typeName = config.GetValue<string>($"{discriminator}");
+			if (typeName == null)
+				throw new Exception("Invalid type to be deserialized!");
+
+			if (!typeMap.ContainsKey(typeName))
+				throw new Exception("Invalid type to be deserialized!");
+			T conf = typeMap[typeName]();
+
+			// bind the config to the instance
+			config.GetSection("").Bind(conf);
+
+			return conf;
 		}
 	}
 }
