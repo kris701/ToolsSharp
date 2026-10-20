@@ -1,6 +1,5 @@
 ﻿using Microsoft.Graph;
 using Microsoft.Graph.Models;
-using Microsoft.Identity.Client;
 using Microsoft.Kiota.Abstractions.Authentication;
 
 namespace ToolsSharp.Services

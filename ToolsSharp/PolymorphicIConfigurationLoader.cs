@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace Helvion.CargoBI.API.Modules.DAI.Helpers
+namespace ToolsSharp
 {
 	/// <summary>
 	/// Helper to get a IConfiguration section as a polymorhpic deserialization

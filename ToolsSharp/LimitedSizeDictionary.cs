@@ -8,9 +8,9 @@
 	/// <typeparam name="TValue"></typeparam>
 	public class LimitedSizeDictionary<TKey, TValue> where TKey : notnull
 	{
-		private Dictionary<TKey, TValue> _dict;
+		private readonly Dictionary<TKey, TValue> _dict;
 		private Queue<TKey> _queue;
-		private int _size;
+		private readonly int _size;
 
 		/// <summary>
 		/// Get a dictionary value by its key

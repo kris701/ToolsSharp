@@ -1,8 +1,5 @@
 ﻿using Microsoft.Identity.Client;
 using Microsoft.Kiota.Abstractions.Authentication;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ToolsSharp.Services
 {

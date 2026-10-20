@@ -1,100 +1,100 @@
 ﻿namespace ToolsSharp.Tests
 {
-    [TestClass]
-    public class StreamHelperTests
-    {
-        #region StreamToString, Stream
+	[TestClass]
+	public class StreamHelperTests
+	{
+		#region StreamToString, Stream
 
-        [TestMethod]
-        [DataRow("abccda")]
-        [DataRow("a   sfe  2154   a")]
-        [DataRow("")]
-        public void Can_StreamToString(string data)
-        {
-            // ARRANGE
-            Stream str = new MemoryStream();
-            StreamWriter writer = new StreamWriter(str);
-            writer.Write(data);
-            writer.Flush();
-            str.Position = 0;
+		[TestMethod]
+		[DataRow("abccda")]
+		[DataRow("a   sfe  2154   a")]
+		[DataRow("")]
+		public void Can_StreamToString(string data)
+		{
+			// ARRANGE
+			Stream str = new MemoryStream();
+			StreamWriter writer = new StreamWriter(str);
+			writer.Write(data);
+			writer.Flush();
+			str.Position = 0;
 
-            // ACT
-            var result = StreamHelper.StreamToString(str);
+			// ACT
+			var result = StreamHelper.StreamToString(str);
 
-            // ASSERT
-            Assert.AreEqual(data, result);
+			// ASSERT
+			Assert.AreEqual(data, result);
 
-            writer.Close();
-        }
+			writer.Close();
+		}
 
-        [TestMethod]
-        public void Cant_StreamToString_IfStreamClosed()
-        {
-            // ARRANGE
-            Stream str = new MemoryStream();
-            using (StreamWriter writer = new StreamWriter(str))
-                writer.Write("abc");
+		[TestMethod]
+		public void Cant_StreamToString_IfStreamClosed()
+		{
+			// ARRANGE
+			Stream str = new MemoryStream();
+			using (StreamWriter writer = new StreamWriter(str))
+				writer.Write("abc");
 
-            // ACT
-            Assert.ThrowsExactly< ArgumentNullException>(() => StreamHelper.StreamToString(str));
-        }
-
-        #endregion StreamToString, Stream
-
-        #region StreamToString, MemoryStream
-
-        [TestMethod]
-        [DataRow("abccda")]
-        [DataRow("a   sfe  2154   a")]
-        [DataRow("")]
-        public void Can_StreamToString_MemoryStream(string data)
-        {
-            // ARRANGE
-            MemoryStream str = new MemoryStream();
-            StreamWriter writer = new StreamWriter(str);
-            writer.Write(data);
-            writer.Flush();
-            str.Position = 0;
-
-            // ACT
-            var result = StreamHelper.StreamToString(str);
-
-            // ASSERT
-            Assert.AreEqual(data, result);
-
-            writer.Close();
-        }
-
-        [TestMethod]
-        public void Cant_StreamToString_MemoryStream_IfStreamClosed()
-        {
-            // ARRANGE
-            MemoryStream str = new MemoryStream();
-            using (StreamWriter writer = new StreamWriter(str))
-                writer.Write("abc");
-
-            // ACT
+			// ACT
 			Assert.ThrowsExactly<ArgumentNullException>(() => StreamHelper.StreamToString(str));
 		}
 
-        #endregion StreamToString, MemoryStream
+		#endregion StreamToString, Stream
 
-        #region StringToStream
+		#region StreamToString, MemoryStream
 
-        [TestMethod]
-        [DataRow("abccda")]
-        [DataRow("a   sfe  2154   a")]
-        [DataRow("")]
-        public void Can_StringToStream_MemoryStream(string data)
-        {
-            // ARRANGE
-            // ACT
-            var result = StreamHelper.StringToStream(data);
+		[TestMethod]
+		[DataRow("abccda")]
+		[DataRow("a   sfe  2154   a")]
+		[DataRow("")]
+		public void Can_StreamToString_MemoryStream(string data)
+		{
+			// ARRANGE
+			MemoryStream str = new MemoryStream();
+			StreamWriter writer = new StreamWriter(str);
+			writer.Write(data);
+			writer.Flush();
+			str.Position = 0;
 
-            // ASSERT
-            Assert.AreEqual(data, StreamHelper.StreamToString(result));
-        }
+			// ACT
+			var result = StreamHelper.StreamToString(str);
 
-        #endregion StringToStream
-    }
+			// ASSERT
+			Assert.AreEqual(data, result);
+
+			writer.Close();
+		}
+
+		[TestMethod]
+		public void Cant_StreamToString_MemoryStream_IfStreamClosed()
+		{
+			// ARRANGE
+			MemoryStream str = new MemoryStream();
+			using (StreamWriter writer = new StreamWriter(str))
+				writer.Write("abc");
+
+			// ACT
+			Assert.ThrowsExactly<ArgumentNullException>(() => StreamHelper.StreamToString(str));
+		}
+
+		#endregion StreamToString, MemoryStream
+
+		#region StringToStream
+
+		[TestMethod]
+		[DataRow("abccda")]
+		[DataRow("a   sfe  2154   a")]
+		[DataRow("")]
+		public void Can_StringToStream_MemoryStream(string data)
+		{
+			// ARRANGE
+			// ACT
+			var result = StreamHelper.StringToStream(data);
+
+			// ASSERT
+			Assert.AreEqual(data, StreamHelper.StreamToString(result));
+		}
+
+		#endregion StringToStream
+	}
 }
