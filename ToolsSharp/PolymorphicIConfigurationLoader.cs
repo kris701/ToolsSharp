@@ -62,7 +62,7 @@ namespace ToolsSharp
 			T conf = typeMap[typeName]();
 
 			// bind the config to the instance
-			config.GetSection("").Bind(conf);
+			config.Bind(conf);
 
 			return conf;
 		}
