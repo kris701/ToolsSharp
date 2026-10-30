@@ -44,7 +44,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.14" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.14" />
     <PackageReference Include="Microsoft.Graph" Version="6.9.0" />
-    <PackageReference Include="Microsoft.Identity.Client" Version="4.91.1" />
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.92.0" />
     <PackageReference Include="System.Management" Version="10.0.14" />
   </ItemGroup>
 
