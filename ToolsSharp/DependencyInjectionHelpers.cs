@@ -13,7 +13,7 @@ namespace ToolsSharp
 		/// <typeparam name="TInterface"></typeparam>
 		/// <typeparam name="TInstance"></typeparam>
 		/// <param name="services"></param>
-		public static void AddInstanceAndInfterfaceSingleton<TInterface, TInstance>(this IServiceCollection services)
+		public static IServiceCollection AddInstanceAndInfterfaceSingleton<TInterface, TInstance>(this IServiceCollection services)
 			where TInstance : class, TInterface
 			where TInterface : class
 		{
@@ -23,6 +23,7 @@ namespace ToolsSharp
 				var existing = sp.GetRequiredService<TInstance>();
 				return existing;
 			});
+			return services;
 		}
 	}
 }
