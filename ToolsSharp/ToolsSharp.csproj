@@ -45,7 +45,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.14" />
     <PackageReference Include="Microsoft.Graph" Version="6.9.0" />
     <PackageReference Include="Microsoft.Identity.Client" Version="4.92.0" />
-    <PackageReference Include="System.Management" Version="10.0.14" />
+    <PackageReference Include="System.Management" Version="11.0.0" />
   </ItemGroup>
 
 </Project>
